@@ -21,6 +21,7 @@ public:
     RM3100(SPIClass &spi, uint8_t chipSelectPin);
 
     bool begin(uint16_t cycleCount = 200);
+    bool begin(uint16_t cycleCount, int8_t sckPin, int8_t misoPin, int8_t mosiPin);
     bool isConnected();
     uint8_t readRevision();
 
