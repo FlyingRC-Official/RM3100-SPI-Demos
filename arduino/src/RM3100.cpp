@@ -16,6 +16,15 @@ bool RM3100::begin(uint16_t cycleCount) {
     return setCycleCountXYZ(_cycleCount);
 }
 
+bool RM3100::begin(uint16_t cycleCount, int8_t sckPin, int8_t misoPin, int8_t mosiPin) {
+    pinMode(_chipSelectPin, OUTPUT);
+    digitalWrite(_chipSelectPin, HIGH);
+    _spi.begin(sckPin, misoPin, mosiPin, _chipSelectPin);
+
+    _cycleCount = cycleCount;
+    return setCycleCountXYZ(_cycleCount);
+}
+
 bool RM3100::isConnected() {
     const uint8_t revision = readRevision();
     return revision != 0x00 && revision != 0xFF;
